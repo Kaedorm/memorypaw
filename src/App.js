@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
+const images=[
+  { "src": "/image/chase"},
+  { "src": "/image/everest"},
+  { "src": "/image/rocky"},
+  { "src": "/image/rubble"},
+  { "src": "/image/ryder"},
+  { "src": "/image/skyes"},
+  { "src": "/image/tracker"},
+  { "src": "/image/zuma"},
+]
+
 function App() {
+  const [cards, setcards] = useState([])
+  const [moves, setMoves] = useState(0)
+
+  // shuffle and duplicate cards
+  const shuffleCards = ()=>{
+    // duplicate all the cards
+    const shuffledCards = [...images, ...images]
+    // randomize them 
+    .sort(()=>Math.random() -0.5)
+    // giving each card an Id
+    .map((card)=>({...card, id: Math.random()}))
+
+    setcards(shuffledCards)
+    setMoves(0)
+  }
+
+  console.log(cards, moves)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Memory Game</h1>
+      <button onClick={shuffleCards}>New Game</button>
     </div>
   );
 }
