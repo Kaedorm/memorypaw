@@ -1,0 +1,13 @@
+.card-display {
+    position: relative;
+    
+}
+
+.card-display img{
+    display: block;
+    width: 200px;
+    height: 250px;
+    border: 2px solid black;
+    background-color: blue; 
+}
+
