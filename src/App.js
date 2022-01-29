@@ -6,33 +6,33 @@ import './App.css';
 import Card from './components/Card';
 
 const images = [{
-    "src": "/image/chase.png"
+  "src": "/image/chase.png", matched: false
+},
+  {
+    "src": "/image/everest.png", matched: false
   },
   {
-    "src": "/image/everest.png"
+    "src": "/image/rocky.png", matched: false
   },
   {
-    "src": "/image/rocky.png"
+    "src": "/image/rubble.png", matched: false
   },
   {
-    "src": "/image/rubble.png"
+    "src": "/image/ryder.png", matched: false
   },
   {
-    "src": "/image/ryder.png"
+    "src": "/image/skyes.png", matched: false
   },
   {
-    "src": "/image/skyes.png"
+    "src": "/image/tracker.png", matched: false
   },
   {
-    "src": "/image/tracker.png"
-  },
-  {
-    "src": "/image/zuma.png"
+    "src": "/image/zuma.png", matched: false
   },
 ]
 
 function App() {
-  const [cards, setcards] = useState([])
+  const [cards, setCards] = useState([])
   const [moves, setMoves] = useState(0)
   //player choices
   const [firstPick, setFirstPick] = useState(null)
@@ -50,7 +50,7 @@ function App() {
         id: Math.random()
       }))
 
-    setcards(shuffledCards)
+    setCards(shuffledCards)
     setMoves(0)
   }
 
@@ -65,11 +65,19 @@ function App() {
   useEffect(() => {
     if (firstPick && secondPick) {
       if (firstPick.src === secondPick.src) {
-        console.log("it's a match");
+        setCards(prevCards =>{
+          return prevCards.map(card => {
+            if (card.src === firstPick.src) {
+              return {...card, matched: true}
+            } else{
+              return card
+            }
+          })
+        })
         nextTurn()
       } 
       else {
-        console.log("lost");
+        setTimeout(()=>nextTurn(), 1000)
       }
     }
   }, [firstPick, secondPick])
@@ -82,7 +90,7 @@ function App() {
   }
 
   return ( <div className = "App" >
-    <h1> Memory Game </h1>
+    <h1> Pat'Mémoire </h1>
     <button onClick = {shuffleCards}>New Game</button> 
     <div className = "card-grid"> {
       cards.map(card => (
