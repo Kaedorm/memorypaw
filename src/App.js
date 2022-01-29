@@ -54,7 +54,7 @@ function App() {
     setMoves(0)
   }
 
-  //increasing counter and reseting player choices
+  //increase counter and reseting player choices
   const nextTurn = () => {
     setFirstPick(null)
     setSecondPick(null)
@@ -67,43 +67,34 @@ function App() {
       if (firstPick.src === secondPick.src) {
         console.log("it's a match");
         nextTurn()
-      } else {
+      } 
+      else {
         console.log("lost");
       }
     }
   }, [firstPick, secondPick])
 
 
-// handle the player's choice
-const handleChoice = (card) => {
-  //ternary: if first pick is null, it will set firstPick, if not, it will set secondPick
-  firstPick ? setSecondPick(card) : setFirstPick(card)
-}
+  // handle the player's choice
+  const handleChoice = (card) => {
+    //ternary: if first pick is null, it will set firstPick, if not, it will set secondPick
+    firstPick ? setSecondPick(card) : setFirstPick(card)
+  }
 
-return ( <
-  div className = "App" >
-  <
-  h1 > Memory Game < /h1> <
-  button onClick = {
-    shuffleCards
-  } > New Game < /button> <
-  div className = "card-grid" > {
-    cards.map(card => ( <
-      Card key = {
-        card.id
-      }
-      card = {
-        card
-      }
-      handleChoice = {
-        handleChoice
-      }
-      />
-    ))
-  } <
-  /div> <
-  /div>
-);
-}
+  return ( <div className = "App" >
+    <h1> Memory Game </h1>
+    <button onClick = {shuffleCards}>New Game</button> 
+    <div className = "card-grid"> {
+      cards.map(card => (
+          <Card 
+            key = {card.id}
+            card = {card}
+            handleChoice = {handleChoice}
+            flipped = {card === firstPick || card === secondPick || card.matched}
+          />
+      ))} 
+    </div> 
+  </div>
+);}
 
 export default App;
