@@ -16,3 +16,4 @@ export default function Card({card, handleChoice, flipped}) {
     </div>
   )
 }
+ 

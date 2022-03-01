@@ -65,7 +65,7 @@ function App() {
   useEffect(() => {
     if (firstPick && secondPick) {
       if (firstPick.src === secondPick.src) {
-        setCards(prevCards =>{
+        setCards((prevCards) =>{
           return prevCards.map(card => {
             if (card.src === firstPick.src) {
               return {...card, matched: true}
