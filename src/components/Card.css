@@ -6,15 +6,27 @@
     display: block;
     width: 150px;
     height: 150px;
-    border: 2px solid black;
-    background-color: blue; 
+    border: 2px solid rgb(253, 247, 247);
+    background-color: rgb(38, 58, 245); 
 }
+
 /* hide the card rotating it */
 .card-display .front{
     transform: rotateY(90deg);
     position: absolute;
+    transition: all ease-in 0.1s;
 }
 
 .flipped .front{
     transform: rotateY(0deg);
+    transition-delay: 0.1s;
+}
+
+.card-display .back{
+    transition: all ease-in 0.1s;
+    transition-delay: 0.1s;
+}
+.flipped .back{
+    transform: rotateY(90deg);
+    transition-delay: 0s;
 }

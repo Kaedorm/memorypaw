@@ -37,6 +37,8 @@ function App() {
   //player choices
   const [firstPick, setFirstPick] = useState(null)
   const [secondPick, setSecondPick] = useState(null)
+  //disabling the click after picking 2 cards
+  const[disabled, setDisabled]= useState(false)
 
   // shuffle and duplicate cards
   const shuffleCards = () => {
@@ -54,16 +56,19 @@ function App() {
     setMoves(0)
   }
 
-  //increase counter and reseting player choices
+  //increase counter and reseting player choices and allows card to be turned
   const nextTurn = () => {
     setFirstPick(null)
     setSecondPick(null)
     setMoves(prevMoves => prevMoves + 1)
+    setDisabled(false)
   }
 
   // compare the 2 picks
   useEffect(() => {
     if (firstPick && secondPick) {
+      //turning true: another card cannot be turned
+      setDisabled(true)
       if (firstPick.src === secondPick.src) {
         setCards((prevCards) =>{
           return prevCards.map(card => {
@@ -99,6 +104,7 @@ function App() {
             card = {card}
             handleChoice = {handleChoice}
             flipped = {card === firstPick || card === secondPick || card.matched}
+            disabled={disabled}
           />
       ))} 
     </div> 
