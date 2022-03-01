@@ -51,7 +51,8 @@ function App() {
         ...card,
         id: Math.random()
       }))
-
+    setFirstPick(null)
+    setSecondPick(null)
     setCards(shuffledCards)
     setMoves(0)
   }
@@ -60,7 +61,7 @@ function App() {
   const nextTurn = () => {
     setFirstPick(null)
     setSecondPick(null)
-    setMoves(prevMoves => prevMoves + 1)
+    setMoves(prevMoves => prevMoves + 1) //notion à reprendre
     setDisabled(false)
   }
 
@@ -94,9 +95,15 @@ function App() {
     firstPick ? setSecondPick(card) : setFirstPick(card)
   }
 
+//start the game automatically.
+useEffect(()=>{
+  shuffleCards()
+},[])
+
   return ( <div className = "App" >
     <h1> Pat'Mémoire </h1>
-    <button onClick = {shuffleCards}>New Game</button> 
+    <button onClick = {shuffleCards}>New Game</button>
+    <p>Tour:{moves} </p>
     <div className = "card-grid"> {
       cards.map(card => (
           <Card 
@@ -107,7 +114,7 @@ function App() {
             disabled={disabled}
           />
       ))} 
-    </div> 
+    </div>
   </div>
 );}
 

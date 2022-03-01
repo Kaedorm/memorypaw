@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   max-width: 800px;
-  margin: 50px auto;
+  margin: 0 auto;
 }
 h1{
   margin: 5px;
@@ -12,7 +12,10 @@ button{
   border: 1px solid #eee;
   padding: 10px;
 }
-
+p{
+  display: inline-block;
+  margin-left: 2em;
+}
 button:hover{
   background: darkcyan;
 }
